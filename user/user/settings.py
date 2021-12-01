@@ -135,3 +135,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'myouremail'
 EMAIL_HOST_PASSWORD = 'yourpassword'
 EMAIL_USE_TLS = True
+
+#for phone authetication
+api_key = "your apikey"

@@ -1,3 +1,5 @@
+import random
+import requests
 from django.shortcuts import render
 from .models import Register
 from django.contrib import messages
@@ -25,3 +27,27 @@ def register(request):
         else:
             messages.error(request, 'Passwords don\'t match!, please try to register again')
     return render(request, 'register.html')
+
+
+def login(request):
+    if request.method == 'POST':
+
+        Mobile_number = request.POST['mobile']
+
+        sendotp(
+            Mobile_number
+        )
+    else:
+        messages.error(request, 'phone number is not valid!')
+    return render(request, 'login.html')
+
+
+def sendotp(phone_number):
+    try:
+        otp = random.randint(1000, 9999)
+        url = f"https://2factor.in/API/V1/{settings.api_key}/SMS/{phone_number}/{otp}"
+        response = requests.get(url)
+        return otp
+    except Exception as e:
+        print(e)
+        return None
